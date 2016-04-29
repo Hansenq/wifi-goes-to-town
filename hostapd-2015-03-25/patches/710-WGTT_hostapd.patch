@@ -1,0 +1,67 @@
+--- a/hostapd/ctrl_iface.c
++++ b/hostapd/ctrl_iface.c
+@@ -717,6 +717,8 @@ static int hostapd_ctrl_iface_hs20_deaut
+ 	size_t url_len;
+ 	struct wpabuf *req;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: ctrl_iface.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	/* <STA MAC Addr> <Code(0/1)> <Re-auth-Delay(sec)> [URL] */
+ 	if (hwaddr_aton(cmd, addr))
+ 		return -1;
+@@ -869,6 +871,8 @@ static int hostapd_ctrl_iface_disassoc_i
+ 	int disassoc_timer;
+ 	struct sta_info *sta;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: ctrl_iface.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	if (hwaddr_aton(cmd, addr))
+ 		return -1;
+ 	if (cmd[17] != ' ')
+@@ -895,6 +899,8 @@ static int hostapd_ctrl_iface_ess_disass
+ 	int disassoc_timer;
+ 	struct sta_info *sta;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: ctrl_iface.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	if (hwaddr_aton(cmd, addr))
+ 		return -1;
+ 
+@@ -1917,6 +1923,8 @@ static void hostapd_ctrl_iface_receive(i
+ 	int reply_len;
+ 	int level = MSG_DEBUG;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: ctrl_iface.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	res = recvfrom(sock, buf, sizeof(buf) - 1, 0,
+ 		       (struct sockaddr *) &from, &fromlen);
+ 	if (res < 0) {
+--- a/hostapd/main.c
++++ b/hostapd/main.c
+@@ -50,6 +50,8 @@ static void hostapd_logger_cb(void *ctx,
+ 	int conf_syslog_level, conf_stdout_level;
+ 	unsigned int conf_syslog, conf_stdout;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: main.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	maxlen = len + 100;
+ 	format = os_malloc(maxlen);
+ 	if (!format)
+@@ -165,6 +167,8 @@ static int hostapd_driver_init(struct ho
+ 	u8 *b = conf->bssid;
+ 	struct wpa_driver_capa capa;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: main.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	if (hapd->driver == NULL || hapd->driver->hapd_init == NULL) {
+ 		wpa_printf(MSG_ERROR, "No hostapd driver wrapper available");
+ 		return -1;
+@@ -259,6 +263,8 @@ hostapd_interface_init(struct hapd_inter
+ 	struct hostapd_iface *iface;
+ 	int k;
+ 
++	wpa_printf(MSG_DEBUG, "WGTT-HOSTAPD: main.c %s:%d \n", __FUNCTION__, __LINE__);	
++
+ 	wpa_printf(MSG_ERROR, "Configuration file: %s", config_fname);
+ 	iface = hostapd_init(interfaces, config_fname);
+ 	if (!iface)
